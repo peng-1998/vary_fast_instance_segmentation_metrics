@@ -11,11 +11,11 @@ Copy the metrics.py file and call it in your preferred way.
 # Performance
 I tested it using the predicted results generated during my research on cell nucleus instance segmentation and the ground truth from the dataset (MoNuSeg's test set). The images have a resolution of 1000X1000, and the times in the table are the average times for all the images. This implementation uses an RTX 3060 GPU for acceleration.
 The runtime tests are as follows:
-||AJI  |PQ   |Dice2|
-|:---:|:---:|:---:|:---:|
-|Original Implementation|1.095s|1.061s|1.063s|
-|This Implementation (GPU)|0.082s|0.087s|0.027s|
-|This Implementation (CPU)	|0.369s|0.350s|0.336s|
+||AJI  |PQ   |Dice2| all in one|
+|:---:|:---:|:---:|:---:|:---:|
+|Original Implementation|1.058s|1.027s|1.004s| - |
+|This Implementation (GPU)|0.008552s|0.007037s|0.006611s|0.01003s|
+|This Implementation (CPU)|0.3013s|0.3024s|0.2991s|0.3135s|
 
 About memory usage:
 Due to PyTorch's memory caching mechanism, it is not easy to measure accurately, but here is a rough estimate:
