@@ -294,7 +294,7 @@ def remap_label_fast(label: Tensor, max_id: int = None):
 
     if max_id is None:
         max_id = label.max().item()
-    ids = label.unique(sorted=False)
+    ids = label.unique()
     temp = torch.zeros(max_id + 1, dtype=label.dtype, device=label.device)
     temp[ids] = torch.arange(len(ids), dtype=label.dtype, device=label.device)
     return temp[label]
