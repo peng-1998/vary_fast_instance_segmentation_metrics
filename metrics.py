@@ -15,7 +15,7 @@ def _check_continuous(*args: Tensor):
         max_id = arg.max().item()
         if arg.unique().numel() != max_id + 1:
             if max_id > arg.numel():
-                arg = remap_label_fast(arg, max_id)
+                res.append(remap_label(arg))
             else:
                 res.append(remap_label_fast(arg))
         else:
@@ -258,7 +258,7 @@ def remap_label(label: Tensor):
         Tensor: remapped label.
     """
 
-    ids = torch.unique(label, sorted=False)[1:].tolist()
+    ids = torch.unique(label)[1:].tolist()
     new_pred = torch.zeros_like(label)
     for i, id in enumerate(ids):
         new_pred[label == id] = i + 1
@@ -275,7 +275,7 @@ def remap_label_(label: Tensor):
     Return:
         Tensor: remapped label, it is the same object with input label.
     """
-    ids = torch.unique(label, sorted=False)[1:].tolist()
+    ids = torch.unique(label)[1:].tolist()
     for i, id in enumerate(ids):
         label[label == id] = i + 1
     return label
